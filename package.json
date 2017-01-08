@@ -63,6 +63,7 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
+    "@accounts/accounts": "git+https://github.com/js-accounts/accounts.git#git-package",
     "immutable-form": "^0.0.5",
     "react": "^15.3.2",
     "react-redux": "^4.4.5",
