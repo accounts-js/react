@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@accounts/accounts": "git+https://github.com/js-accounts/accounts.git#git-package",
-    "immutable-form": "^0.0.5",
+    "immutable-form": "git+https://github.com/davidyaha/immutable-form.git#git-package",
     "react": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
