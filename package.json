@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack -d --progress --watch",
     "bundle": "webpack -p --progress",
-    "postinstall": "npm run bundle",
     "prepublishOnly": "npm run bundle",
     "test": "mocha --compilers js:babel-core/register \"src/**/*.spec.js\"",
     "lint": "eslint src",
