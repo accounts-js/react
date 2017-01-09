@@ -1744,12 +1744,13 @@ ignore@^3.2.0:
 
 "immutable-form@git+https://github.com/davidyaha/immutable-form.git#git-package":
   version "0.0.7"
-  resolved "git+https://github.com/davidyaha/immutable-form.git#896df409bc406be68180cf677e6fbac5827a20c1"
+  resolved "git+https://github.com/davidyaha/immutable-form.git#d74ac312f6217982898f3d009f407824b94e9e02"
   dependencies:
     immutable "^3.8.1"
     react "^15.4.1"
     redux "^3.6.0"
     redux-immutable "^3.0.8"
+  optionalDependencies:
     redux-logger "^2.7.4"
 
 immutable@^3.8.1:
