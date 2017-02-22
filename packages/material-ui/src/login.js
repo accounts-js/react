@@ -28,24 +28,34 @@ LoginFields.propTypes = {
   children: PropTypes.node,
 };
 
-const LoginUserField = ({ ...otherProps }) =>
+const LoginUserField = ({ onChangeLoginUserField, ...otherProps }) =>
   <TextField
     hintText="Username or email"
     style={{
       marginBottom: 10,
     }}
+    onChange={onChangeLoginUserField}
     {...otherProps}
   />;
 
-const LoginPasswordField = ({ ...otherProps }) =>
+LoginUserField.propTypes = {
+  onChangeLoginUserField: PropTypes.func,
+};
+
+const LoginPasswordField = ({ onChangeLoginPasswordField, ...otherProps }) =>
   <TextField
     hintText="Password"
     type="password"
     style={{
       marginBottom: 10,
     }}
+    onChange={onChangeLoginPasswordField}
     {...otherProps}
   />;
+
+LoginPasswordField.propTypes = {
+  onChangeLoginPasswordField: PropTypes.func,
+};
 
 const LoginButton = () =>
   <RaisedButton
@@ -121,7 +131,7 @@ const Login = ({
   LoginButton,
   SignupButton,
   ...otherProps
-}) => (
+}) =>
   <DefaultLayout
     Header={Header}
     Footer={() => <Footer SignupButton={SignupButton} />}
@@ -129,13 +139,12 @@ const Login = ({
   >
     <Avatar />
     <LoginFields>
-      <LoginUserField />
-      <LoginPasswordField />
+      <LoginUserField {...otherProps} />
+      <LoginPasswordField {...otherProps} />
     </LoginFields>
     <LoginButton />
     <RecoverButton />
-  </DefaultLayout>
-  );
+  </DefaultLayout>;
 
 Login.propTypes = {
   Avatar: PropTypes.node,

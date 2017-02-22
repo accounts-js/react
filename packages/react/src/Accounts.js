@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import AccountsClient from '@accounts/client';
 import FormTypes from './FormTypes';
-import connectLoginForm from './connectLoginForm';
+import enhanceLogin from './enhanceLogin';
 
 class Accounts extends Component {
   static propTypes = {
@@ -27,16 +27,17 @@ class Accounts extends Component {
     const {
       Login,
       Signup,
+      ...otherProps
     } = this.props;
-    let ConnectedForm;
+    let Form;
     switch (this.state.formType) {
       case FormTypes.LOGIN:
-        ConnectedForm = connectLoginForm(<Login />);
+        Form = enhanceLogin(Login);
         break;
       default:
         break;
     }
-    return <ConnectedForm setFormType={this.setFormType} {...this.props} />;
+    return <Form {...otherProps} />;
   }
 }
 

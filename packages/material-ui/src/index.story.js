@@ -23,7 +23,11 @@ const style = {
 storiesOf('Accounts', module)
   .add('login', () => (
     <div style={style}>
-      <AccountsWithContext formType="login" />
+      <AccountsWithContext
+        formType="login" onChangeLoginUserField={(e) => {
+          console.log('HIT');
+        }}
+      />
     </div>
   ))
   .add('signup', () => (
