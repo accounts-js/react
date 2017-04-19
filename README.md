@@ -20,32 +20,36 @@ This is a simple example with react-router.
 ```javascript
 import AccountsClient from '@accounts/client';
 import restClient from '@accounts/rest-client';
-import { accountRoutes, withUser, Authenticated } from '@accounts/react';
+import { accountRoutes, Authenticate, withCurrentUser } from '@accounts/react';
 
 // If you want the material-ui view
-import '@accounts/react-material-ui';
+import Accounts from '@accounts/react-material-ui';
 
 // Setup client config and try to resume session to know if user is logged
 (async () => {
-  AccountsClient.config({
+  await AccountsClient.config({
     server: 'http://localhost:3010',
     history: browserHistory,
-    title: 'my-app-title',
+    title: 'express-rest',
     loginPath: '/login',
     signUpPath: '/signup',
-    homePath: '/home',
+    homePath: '/',
     reduxLogger: createLogger(),
-  }, restClient);
+    passwordSignupFields: 'USERNAME_AND_EMAIL',
+  }, new RestClient({
+    apiHost: 'http://localhost:3010',
+    rootPath: '/accounts',
+  }));
 
   await AccountsClient.resumeSession();
 })();
 
 // The withUser hoc pass a user prop to the component
-const Home = withUser(({ user }) =>
+const Home = withCurrentUser(AccountsClient)(({ currentUser }) =>
   <div>
     Signed in user info
     <br />
-    {Object.keys(user).map(key => <div key={key}>{key} : {user[key]} </div>)}
+    {Object.keys(currentUser).map(key => <div key={key}>{key} : {currentUser[key]} </div>)}
   </div>,
 );
 
@@ -53,11 +57,35 @@ const Home = withUser(({ user }) =>
 render((
   <MuiThemeProvider>
     <Router history={browserHistory}>
-      <Route path="/" component={Authenticated}>
+      <Route path="/" component={({ children }) =>
+          <Authenticate
+            accounts={AccountsClient}
+            Loading={Loading}
+            Dialog={Accounts}
+          >
+            {children}
+          </Authenticate>}
+        >
         <IndexRoute component={Home} />
         <Route path="/home" component={Home} />
+        {accountRoutes({
+          accounts: AccountsClient,
+          component: Accounts,
+          container: ({ children }) =>
+          (
+            <div
+              style={{
+                height: '85vh',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              {children}
+            </div>
+          ),
+        })}
       </Route>
-      {accountRoutes()}
     </Router>
   </MuiThemeProvider>
 ), document.getElementById('root'));
