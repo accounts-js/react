@@ -3,7 +3,6 @@ import { storiesOf } from '@kadira/storybook';
 import AccountsClient from '@accounts/client';
 import { PasswordSignupFields } from '@accounts/common';
 import { Accounts } from './index';
-import './font.css';
 
 AccountsClient.config({
   passwordSignupFields: PasswordSignupFields.USERNAME_AND_EMAIL,
