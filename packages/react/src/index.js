@@ -1,19 +1,7 @@
-import Accounts from './Accounts';
-import Login from './Login';
-import Signup from './Signup';
-import ForgotPassword from './ForgotPassword';
-import authenticate, { Authenticate } from './authenticate';
-import withCurrentUser, { WithCurrentUser } from './withCurrentUser';
-import accountRoutes from './accountRoutes';
+import AccountsProvider from './accounts-provider';
+import withCurrentUser from './with-current-user';
 
 export {
-  Accounts,
-  Login,
-  Signup,
-  ForgotPassword,
-  authenticate,
-  Authenticate,
+  AccountsProvider,
   withCurrentUser,
-  WithCurrentUser,
-  accountRoutes,
 };
