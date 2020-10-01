@@ -40,7 +40,7 @@ import '@accounts/react-material-ui';
   await AccountsClient.resumeSession();
 })();
 
-// The withUser hoc pass a user prop to the component
+// The withUser hoc passes a user prop to the component
 const Home = withUser(({ user }) =>
   <div>
     Signed in user info
